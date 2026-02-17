@@ -112,14 +112,6 @@ h1 {
         &:hover {
             color : variable.$text-color;
         }
- 
-        &:focus {
-            color : variable.$text-color;
-            background-color : variable.$primary-color;
-            padding : 0.5rem 1rem;
-            border-radius : 999px;
-            font-weight : bold;
-        }
     }
  
     @media(max-width : variable.$mobile) {
