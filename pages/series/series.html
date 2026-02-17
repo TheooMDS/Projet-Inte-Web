@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="png" href="../../favicon.png" />
@@ -9,70 +9,86 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <title> Séries </title>
+    <title>Séries — Visionary</title>
   </head>
-
   <body>
     <header class="navbar">
       <div class="navbar-container">
         <a href="../../index.html">
-          <div class="logo"> 
+          <div class="logo">
             <img class="logo-image" src="/green_visionary.png" alt="logo Visionary">
           </div>
           <div class="logo-mobile">
             <img class="logo-mobile-image" src="../../favicon.png" alt="Logo Visionary">
           </div>
         </a>
-        <h1> Séries </h1>
+        <h1>Séries</h1>
         <div class="bouton-nav-mobile">
-          <a href="../../index.html">
-            <button class="bouton bouton-films">Accueil</button>
-          </a>
-          <a href="../films/films.html">
-            <button class="bouton">Films</button>
-          </a>
+          <a href="../../index.html"><button class="bouton bouton-films">Accueil</button></a>
+          <a href="../films/films.html"><button class="bouton">Films</button></a>
         </div>
         <nav class="nav-links">
-          <a href="series.html"> Séries </a>
-          <a href="../films/films.html"> Films </a>
+          <a href="series.html">Séries</a>
+          <a href="../films/films.html">Films</a>
         </nav>
         <div class="nav-icons">
-          <i class="fas fa-magnifying-glass"></i>
-          <i class="fas fa-bell"></i>
-          <i class="fas fa-user"></i>
+          <form action="../../search.html" method="get" style="display:flex; align-items:center; gap:0.5rem;">
+            <input name="q" type="text" placeholder="Rechercher..."
+              style="background:#1a1a1a; border:1px solid #333; border-radius:999px; padding:0.4rem 1rem; color:#fff; font-size:0.9rem; outline:none; font-family:Inter,sans-serif;" />
+            <button type="submit" style="background:none; border:none; cursor:pointer; color:#ffffffb3; font-size:1.2rem;">
+              <i class="fas fa-magnifying-glass"></i>
+            </button>
+          </form>
+          <button id="theme-toggle" style="background:none; border:none; cursor:pointer; color:#ffffffb3; font-size:1.5rem;">
+            <i class="fas fa-moon"></i>
+          </button>
         </div>
       </div>
     </header>
 
     <main>
       <section>
-        <h2 class="gap"> Policier
-          <span class="fleche"> <i class="fas fa-chevron-right" style="color : #51e351"></i> </span>
+        <h2 class="gap">Policier
+          <span class="fleche"><i class="fas fa-chevron-right" style="color:#51e351"></i></span>
         </h2>
         <div class="defilement" id="grid-policier"></div>
       </section>
 
       <section>
-        <h2 class="gap"> Action
-          <span class="fleche"> <i class="fas fa-chevron-right" style="color : #51e351"></i> </span>
+        <h2 class="gap">Action
+          <span class="fleche"><i class="fas fa-chevron-right" style="color:#51e351"></i></span>
         </h2>
         <div class="defilement" id="grid-action"></div>
       </section>
 
       <section>
-        <h2 class="gap"> Documentaire
-          <span class="fleche"> <i class="fas fa-chevron-right" style="color : #51e351"></i> </span>
+        <h2 class="gap">Documentaire
+          <span class="fleche"><i class="fas fa-chevron-right" style="color:#51e351"></i></span>
         </h2>
         <div class="defilement" id="grid-documentaire"></div>
       </section>
 
       <section>
-        <h2 class="gap"> US
-          <span class="fleche"> <i class="fas fa-chevron-right" style="color : #51e351"></i> </span>
+        <h2 class="gap">US
+          <span class="fleche"><i class="fas fa-chevron-right" style="color:#51e351"></i></span>
         </h2>
         <div class="defilement" id="grid-us"></div>
       </section>
     </main>
+
+    <script>
+      document.getElementById('theme-toggle').addEventListener('click', function() {
+        const html = document.documentElement;
+        const icone = document.querySelector('#theme-toggle i');
+        if (html.getAttribute('data-theme') === 'dark') {
+          html.setAttribute('data-theme', 'light');
+          icone.className = 'fas fa-sun';
+        } else {
+          html.setAttribute('data-theme', 'dark');
+          icone.className = 'fas fa-moon';
+        }
+      });
+    </script>
 
     <script type="module" src="../../src/types/series-cards.ts"></script>
   </body>

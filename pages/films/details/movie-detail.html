@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="png" href="../../../favicon.png" />
@@ -11,12 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <title>Film — Visionary</title>
   </head>
-
   <body>
     <header class="navbar">
       <div class="navbar-container">
         <a href="../../../index.html">
-          <div class="logo"> 
+          <div class="logo">
             <img class="logo-image" src="/green_visionary.png" alt="logo Visionary">
           </div>
           <div class="logo-mobile">
@@ -25,13 +24,20 @@
         </a>
         <h1 id="nav-title">Film</h1>
         <nav class="nav-links">
-          <a href="../../series/series.html"> Séries </a>
-          <a href="../films.html"> Films </a>
+          <a href="../../series/series.html">Séries</a>
+          <a href="../films.html">Films</a>
         </nav>
         <div class="nav-icons">
-          <i class="fas fa-magnifying-glass hover"></i>
-          <i class="fas fa-bell hover"></i>
-          <i class="fas fa-user hover"></i>
+          <form action="../../../search.html" method="get" style="display:flex; align-items:center; gap:0.5rem;">
+            <input name="q" type="text" placeholder="Rechercher..."
+              style="background:#1a1a1a; border:1px solid #333; border-radius:999px; padding:0.4rem 1rem; color:#fff; font-size:0.9rem; outline:none; font-family:Inter,sans-serif;" />
+            <button type="submit" style="background:none; border:none; cursor:pointer; color:#ffffffb3; font-size:1.2rem;">
+              <i class="fas fa-magnifying-glass"></i>
+            </button>
+          </form>
+          <button id="theme-toggle" style="background:none; border:none; cursor:pointer; color:#ffffffb3; font-size:1.5rem;">
+            <i class="fas fa-moon"></i>
+          </button>
         </div>
       </div>
     </header>
@@ -66,7 +72,6 @@
           <p class="film-title-details" id="detail-title"></p>
           <p class="description-details" id="detail-overview"></p>
           <p class="write-green" id="detail-meta"></p>
-
           <div class="actions-details">
             <a id="trailer-link" href="#" target="_blank" rel="noopener">
               <button class="btn bouton-play">
@@ -74,11 +79,24 @@
               </button>
             </a>
           </div>
-
           <div class="rating-details" id="detail-rating"></div>
         </div>
       </section>
     </main>
+
+    <script>
+      document.getElementById('theme-toggle').addEventListener('click', function() {
+        const html = document.documentElement;
+        const icone = document.querySelector('#theme-toggle i');
+        if (html.getAttribute('data-theme') === 'dark') {
+          html.setAttribute('data-theme', 'light');
+          icone.className = 'fas fa-sun';
+        } else {
+          html.setAttribute('data-theme', 'dark');
+          icone.className = 'fas fa-moon';
+        }
+      });
+    </script>
 
     <script type="module" src="../../../src/types/movie-detail.ts"></script>
   </body>
