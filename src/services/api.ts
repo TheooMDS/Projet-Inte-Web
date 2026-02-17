@@ -5,7 +5,6 @@ import type { MovieApiResponse } from '../types/Movie';
 const API_KEY = 'b76e64f8cb3e2dd8275a0c5d101d5831';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-// URL de base pour construire les liens des affiches TMDB
 export const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 export async function fetchPopularMovies(page: number = 1): Promise<MovieApiResponse> {
