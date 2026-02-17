@@ -1,28 +1,28 @@
 @use "variables" as variable;
 @use "mixins" as mixin;
-
+ 
 * {
     box-sizing : border-box;
     margin : 0;
     padding : 0;
 }
-
+ 
 body {
     font-family : "Inter", sans-serif;
     background-color : variable.$background-color;
     color : variable.$text-color;
 }
-
+ 
 header {
     height : 10vh;
 }
-
+ 
 a {
     color : variable.$text-color;
     text-decoration : none;
     transition : color 0.2s;
 }
-
+ 
 .navbar {
     display : fixed;
     align-items : center;
@@ -31,41 +31,89 @@ a {
     top : 0;
     left : 0;
     z-index : 100;
-
-    background : rgba(0, 0, 0, 0);
+ 
+    background : variable.$background-color;
     backdrop-filter : blur(10px);
     -webkit-backdrop-filter : blur(10px);
-
+ 
     &-container {
         display : flex;
         align-items : center;
     }
+ 
+    @media(max-width : variable.$mobile) {
+        padding : 1rem 1.5rem;
+    }
 }
-
-.logo-image {
-    height : 2.2rem;
-    width : auto;
-    display : block;
+ 
+.hover {
+    color : variable.$hover;
+ 
+    @media(max-width : variable.$mobile) {
+        &:active {
+            color : variable.$secondary-color;
+        }
+    }
+ 
+    @media(min-width : variable.$mobile) {
+        &:hover {
+            color : variable.$secondary-color;
+            transition : color 0.2s;
+        }
+    }
 }
-
+ 
 .logo {
     margin-right : 3rem;
+ 
+    &-image {
+        height : 2.2rem;
+        width : auto;
+        display : block;
+    }
+ 
+    @media(max-width : variable.$mobile) {
+        display : none;
+    }
+ 
+    &-mobile {
+        @media(min-width : variable.$mobile) {
+            display : none;
+        }
+ 
+        &-image {
+            height : 4rem;
+            width : auto;
+            display : block;
+        }
+    }
+ 
 }
-
+ 
+h1 {
+    font-size : 1.5rem;
+    font-weight : 500;
+    margin-left : 0.5rem;
+ 
+    @media(min-width : variable.$mobile) {
+        display : none;
+    }
+}
+ 
 .nav-links{
     display: flex;
     gap : 2rem;
     font-size : 1rem;
-
+ 
     a {
-        color : #ffffffb3;
+        color : variable.$hover;
         font-weight : 500;
-
+ 
         &:hover {
             color : variable.$text-color;
         }
-
-        &.active {
+ 
+        &:focus {
             color : variable.$text-color;
             background-color : variable.$primary-color;
             padding : 0.5rem 1rem;
@@ -73,8 +121,12 @@ a {
             font-weight : bold;
         }
     }
+ 
+    @media(max-width : variable.$mobile) {
+        display : none;
+    }
 }
-
+ 
 .nav-icons {
     margin-left : auto;
     display : flex;
@@ -82,7 +134,19 @@ a {
     font-size : 1.5rem;
     cursor : pointer;
 }
-
+ 
+.bouton {
+    @include mixin.button-style-mobile(variable.$button-mobile-light, variable.$button-mobile-dark);
+ 
+    @media(min-width : variable.$mobile) {
+        display : none;
+    }
+ 
+    &-films{
+        margin-left : 2rem;
+    }
+}
+ 
 .couverture {
     position : relative;
     width : 100%;
@@ -91,7 +155,7 @@ a {
     background-size : cover;
     background-position : center center;
     margin-top : -10vh;
-
+ 
     &::before {
         content : "";
         position : absolute;
@@ -101,31 +165,73 @@ a {
         height : 100%;
         background : linear-gradient(77deg, #00000099) 0, transparent 85%;
     }
+ 
+    @media(max-width : variable.$mobile) {
+        background-image : none;
+        height : auto;
+        width : auto;
+ 
+        &::before {
+            content : none;
+        }
+    }
 }
-
+ 
 .affiche {
     position : absolute;
     top : 50%;
     left : 3rem;
     transform : transalteY(-50%);
     width : 35%;
-
-    @media (max-width : 1200px){
+ 
+    @media (max-width : variable.$mobile){
+        width : 100%;
+        position : static;
+        display : flex;
+        justify-content : center;
+    }
+ 
+    &-mobile {
+        display : flex;
+        justify-content : center;
         width : 50%;
+        margin-top : 5rem;
+        border : 1px solid variable.$secondary-color;
+        border-radius : 16px;
+        text-align : center;
+ 
+        @media (min-width : variable.$mobile) {
+            display : none;
+        }
+    }
+ 
+    &-film {
+        width : 100%;
+        border-radius : 16px;
+        padding : 0rem;
     }
 }
-
+ 
 .film-title {
     font-size : 3rem;
     font-weight : bold;
     margin-bottom : 0.5rem;
+ 
+    @media(max-width : variable.$mobile) {
+        display : none;
+    }
 }
-
+ 
 .film-description {
     font-size : 0.8rem;
     margin-bottom : 2rem;
+ 
+    @media(max-width : variable.$mobile) {
+        display : none;
+    }
 }
-
+ 
+ 
 .equilibrage {
     position : absolute;
     bottom : 10%;
@@ -133,78 +239,150 @@ a {
     display : flex;
     align-items : center;
     width : 90%;
+ 
+    @media(max-width : variable.$mobile) {
+        position : static;
+        transform : none;
+        flex-direction : column;
+        align-items : center;
+        justify-content: center;
+        width : 100%;
+        margin : 0;
+        padding : 1.5rem 0;
+    }
 }
-
+ 
 .actions {
     display : flex;
     gap : 1rem;
+ 
+    &-details {
+        display : flex;
+        gap : 1rem;
+        margin-left : 3rem;
+        margin-top : 0.5rem;
+ 
+        @media(max-width: variable.$mobile) {
+            justify-content : center;
+            margin : 2rem 1rem;
+        }
+    }
 }
-
+ 
 .btn {
     @include mixin.button-style(variable.$button-background-light, variable.$background-color);
-
+ 
     &.bouton-play {
         background-color : variable.$button-background-light;
         color : variable.$background-color;
     }
-
+ 
     &.bouton-information {
         @include mixin.button-style(variable.$button-background-dark, variable.$text-color);
     }
 }
-
+ 
 .rating {
     font-size : 1.5rem;
-    color : #ffb900;
+    color : variable.$star-color;
     display : flex;
     align-items : center;
     margin-left : auto;
-
+ 
     .half {
-        color : #ffb900;
+        color : variable.$star-color;
     }
-
+ 
     .empty {
-        color : #555555;
+        color : variable.$star-empty;
+    }
+ 
+    @media(max-width : variable.$mobile) {
+        display : none;
+    }
+ 
+    &-details {
+        font-size : 1.5rem;
+        color : variable.$star-color;
+        display : flex;
+        align-items : center;
+        margin-left : 3rem;
+        margin-top : 0.5rem;
+ 
+        .half {
+            color : variable.$star-color;
+        }
+ 
+        .empty {
+            color : variable.$star-empty;
+        }
+ 
+        @media(max-width: variable.$mobile) {
+            margin : 0rem 1rem 1rem 1rem;
+        }
     }
 }
-
+ 
 .grid {
     display : grid;
     grid-template-columns : 30% 22% 22% 22%;
     grid-template-rows : repeat(2, 400px);
     gap : 1.5rem;
     padding : 3rem;
+ 
+    @media(max-width : variable.$mobile) {
+        display : none;
+    }
 }
-
+ 
 .box {
-    position : relative;
-    overflow : hidden;
-    transition : transform 0.3s ease-in-out;
-
+    position : relative;    
+   
+ 
     &-1{
         grid-row-start : 1;
         grid-row-end: 3;
+        transition : transform 0.3s ease-in-out;
+       
+        &:hover {
+            transition : transform 0.3s ease-in-out;
+            transform : scale(1.05);
+        }
     }
-
+ 
+    &-2 {
+        transition : transform 0.3s ease-in-out;
+ 
+        &:hover{
+            transition : transform 0.3s ease-in-out;
+            transform : scale(1.05);
+        }
+    }
+ 
     &:hover {
         transform : scale(1.05);
     }
-
+ 
     &-3 {
         flex : 0 0 calc(100%/5.5);
         padding : 0 0.5rem;
         box-sizing: border-box;
-
+        transition : transform 0.3s ease-in-out;
+ 
         & img {
             width : 100%;
             height : 100%;
             display : block;
             object-fit : cover;
         }
+ 
+        &:hover {
+            transition : transform 0.3s ease-in-out;
+            transform : scale(1.05);
+        }
     }
 }
-
+ 
 .cover {
     border-radius : 16px;
     width : 100%;
@@ -212,33 +390,176 @@ a {
     object-fit : cover;
     transition : transform 0.3s ease-in-out;
 }
-
+ 
 h2 {
     margin-left : 1.5rem;
     font-size : 1.3rem;
-    transition : font-size 0.2s, color 0.2s ease-out;
+    transition : transform 0.3s ease-in-out;
     display : inline-block;
-
+ 
     &:hover {
-        color : variable.$text-color;
-        transform : translateX(10px) scale(1.2);
+        transition : transform 0.3s ease-in-out;
+        transform : scale(1.1);
+        }
+}
+ 
+.fleche {
+    @media(max-width : variable.$mobile) {
+        display : none;
     }
 }
-
+ 
 .defilement {
     display : flex;
     overflow-x : scroll;
-    overflow-y : hidden;
-    margin : 1.5rem 1.5rem;;
-    
+    overflow-y : hidden; ;
+   
     &::-webkit-scrollbar {
         display : none;
     }
-
+ 
     -ms-orverflow-style : none;
     scrollbar-width : none;
 }
-
+ 
 .gap {
     margin-top : 3rem;
+}
+ 
+.carroussel {
+    margin-top : 2rem;
+ 
+    @media(max-width : variable.$mobile) {
+        margin-top : 3rem;
+    }
+}
+ 
+.flexing {
+    display : flex;
+    margin-left : 3rem;
+ 
+    @media(max-width : variable.$mobile) {
+        display : block;
+        margin-left : 0;
+    }
+}
+ 
+ 
+.cover-details {
+    width : 70%;
+    height : auto;
+    margin : auto;
+    display : flex;
+    justify-content : center;
+ 
+    &-img {
+        width : 100%;
+        height : auto;
+        display : block;
+        border-radius : 16px;
+        margin : 3rem 0;
+ 
+        @media(max-width: variable.$mobile) {
+            margin : auto;
+        }
+    }
+ 
+    @media(max-width : variable.$mobile) {
+        display : flex;
+        justify-content : center;
+        width : 50%;
+        margin-top : 2rem;
+        border : 1px solid variable.$secondary-color;
+        border-radius : 16px;
+        text-align : center;
+    }
+}
+ 
+.film-title-details {
+    color : variable.$secondary-color;
+    font-size : 2.5rem;
+    font-weight : bold;
+    margin-top : 3rem;
+    margin-left : 3rem;
+   
+    @media(max-width: variable.$mobile) {
+        text-align : center;
+        margin-bottom : 1rem;
+        margin-left : 0;
+    }
+}
+ 
+.flex-column {
+    flex-direction : column;
+ 
+    @media(max-width: variable.$mobile) {
+        margin : 1rem;
+    }
+}
+ 
+.description-details {
+    margin-top : 0.5rem;
+    margin-left : 3rem;
+    font-size : 1.1rem;
+ 
+    @media(max-width: variable.$mobile) {
+        font-size : 0.8rem;
+        margin : 1rem;;
+    }
+}
+ 
+.write-green {
+    color : variable.$primary-color;
+    font-size : 1.1rem;
+    font-weight : 500;
+    margin-left : 3rem;
+    margin-top : 3rem;
+ 
+    @media(max-width: variable.$mobile) {
+        margin : 1rem;
+    }
+}
+ 
+ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+  }
+ 
+  li {
+    display: flex;
+    align-items: center;
+    color: #666;
+ 
+    &:not(:last-child)::after {
+      content: "›";
+      margin-left: 0.5rem;
+      color: #999;
+      font-size: 1.2rem;
+    }
+ 
+    a {
+      color: variable.$primary-color;
+      text-decoration: none;
+      transition: color 0.2s;
+ 
+      &:hover {
+        color: darken(variable.$primary-color, 15%);
+        text-decoration: underline;
+      }
+ 
+      &[aria-current="page"] {
+      color: variable.$secondary-color;
+      font-weight: 600;
+    }
+  }
+}
+ 
+.ariane {
+    margin-top : 2rem;
+    margin-left : 3rem;
 }
