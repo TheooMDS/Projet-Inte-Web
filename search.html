@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="png" href="favicon.png" />
+    <link rel="stylesheet" href="src/sass/main.scss" />
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <title>Recherche — Visionary</title>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="navbar-container">
+        <a href="index.html">
+          <div class="logo">
+            <img class="logo-image" src="/green_visionary.png" alt="Logo Visionary">
+          </div>
+          <div class="logo-mobile">
+            <img class="logo-mobile-image" src="favicon.png" alt="Logo Visionary">
+          </div>
+        </a>
+        <h1>Recherche</h1>
+        <nav class="nav-links">
+          <a href="pages/series/series.html">Séries</a>
+          <a href="pages/films/films.html">Films</a>
+        </nav>
+        <div class="nav-icons">
+          <form action="search.html" method="get" style="display:flex; align-items:center; gap:0.5rem;">
+            <input name="q" type="text" placeholder="Rechercher..."
+              style="background:#1a1a1a; border:1px solid #333; border-radius:999px; padding:0.4rem 1rem; color:#fff; font-size:0.9rem; outline:none; font-family:Inter,sans-serif;" />
+            <button type="submit" style="background:none; border:none; cursor:pointer; color:#ffffffb3; font-size:1.2rem;">
+              <i class="fas fa-magnifying-glass"></i>
+            </button>
+          </form>
+          <button id="theme-toggle" style="background:none; border:none; cursor:pointer; color:#ffffffb3; font-size:1.5rem;">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="carroussel">
+        <h2 class="gaps" id="search-titre">Recherche</h2>
+        <div class="defilement" id="grid-recherche"></div>
+      </section>
+    </main>
+
+    <script>
+      document.getElementById('theme-toggle').addEventListener('click', function() {
+        const html = document.documentElement;
+        const icone = document.querySelector('#theme-toggle i');
+        if (html.getAttribute('data-theme') === 'dark') {
+          html.setAttribute('data-theme', 'light');
+          icone.className = 'fas fa-sun';
+        } else {
+          html.setAttribute('data-theme', 'dark');
+          icone.className = 'fas fa-moon';
+        }
+      });
+    </script>
+
+    <script type="module" src="src/types/search.ts"></script>
+  </body>
+</html>

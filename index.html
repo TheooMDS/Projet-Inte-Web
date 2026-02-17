@@ -26,14 +26,20 @@
         <nav class="nav-links">
           <a href="pages/series/series"> Séries </a>
           <a href="pages/films/films"> Films </a>
-          <!-- <a href="#"> Plus Populaires </a> -->
-          <!-- <a href="pages/ma_liste.html"> Ma liste </a> -->
         </nav>
-        <div class="nav-icons">
-          <i class="fas fa-magnifying-glass hover"></i>
-          <i class="fas fa-bell hover"></i>
-          <i class="fas fa-user hover"></i>
-        </div>
+       <div class="nav-icons">
+  
+        <form action="search.html" method="get" style="display:flex; align-items:center; gap:0.5rem;">
+        <input name="q" type="text" placeholder="Rechercher..."
+        style="background:#1a1a1a; border:1px solid #333; border-radius:999px; padding:0.4rem 1rem; color:#fff; font-size:0.9rem; outline:none; font-family:Inter,sans-serif;" />
+        <button type="submit" style="background:none; border:none; cursor:pointer; color:#ffffffb3; font-size:1.2rem;">
+        <i class="fas fa-magnifying-glass"></i>
+        </button>
+        </form>
+        <button id="theme-toggle" style="background:none; border:none; cursor:pointer; color:#ffffffb3; font-size:1.5rem;">
+        <i class="fas fa-moon"></i>
+        </button>
+      </div>
       </div>
     </header>
 
@@ -57,7 +63,7 @@
               <img class="affiche-film" src="series/accueil/cover_narcos.png" alt="Narcos">
             </div>
             <p class="film-title"> F1 - The Movie </p>
-            <p class="film-description"> Plongez au cœur de l’adrénaline de la Formule 1 avec F1 The Movie. Quand un ancien prodige blessé 
+            <p class="film-description"> Plongez au cœur de l'adrénaline de la Formule 1 avec F1 The Movie. Quand un ancien prodige blessé 
               revient sur le circuit, il doit guider un jeune talent et sauver son équipe de la faillite. Vitesse, rivalités, et 
               dépassement de soi : chaque virage compte dans cette course pour la rédemption. </p>
           </div>
@@ -103,7 +109,6 @@
               <span class="fleche"> <i class="fas fa-chevron-right" style="color : #51e351"></i> </span>
             </h2>
           </a>
-
           <div class="defilement">
             <div class="box-3"> <a href="pages/films/details/accueil/django"><img class="cover" src="/films/accueil/cover_django.jpg" alt="Django"></a></div>
             <div class="box-3"> <a href="pages/films/details/accueil/fury"><img class="cover" src="/films/accueil/cover_fury.jpg" alt="Fury"></a></div>
@@ -124,7 +129,6 @@
               <span class="fleche"> <i class="fas fa-chevron-right" style="color : #51e351"></i> </span>
             </h2>
           </a>
-
           <div class="defilement">
             <div class="box-3"> <a href="pages/films/details/accueil/the_truman_show"><img class="cover" src="/films/accueil/cover_the_truman_show.jpg" alt="The Truman Show"></a></div>
             <div class="box-3"> <a href="pages/films/details/accueil/the_dark_knight"><img class="cover" src="/films/accueil/cover_the_dark_knight.jpg" alt="Batman - The Dark Knight"></a></div>
@@ -143,7 +147,6 @@
               <span class="fleche"> <i class="fas fa-chevron-right" style="color : #51e351"></i> </span>
             </h2>
           </a>
-
           <div class="defilement">
             <div class="box-3"> <a href="pages/series/details/accueil/breaking_bad"><img class="cover" src="/series/accueil/cover_breaking_bad.jpg" alt="Breaking Bad"></a></div>
             <div class="box-3"> <a href="pages/series/details/accueil/drive_to_survive"><img class="cover" src="/series/accueil/cover_drive_to_survive.png" alt="Drive To Survive"></a></div>
@@ -156,5 +159,19 @@
           </div>
       </section>
     </main>
+    <div id="search-overlay" class="search-overlay">
+      <div class="search-box">
+        <div class="search-input-wrap">
+          <i class="fas fa-magnifying-glass"></i>
+          <input id="search-input" type="text" placeholder="Rechercher un film ou une série..." />
+          <button class="search-close" onclick="document.getElementById('search-overlay').classList.remove('search-overlay--open')">
+            <i class="fas fa-xmark"></i>
+          </button>
+        </div>
+        <div id="search-results" class="search-results"></div>
+      </div>
+    </div>
+    <script type="module" src="src/types/theme.ts"></script>
+    <script type="module" src="src/types/search.ts"></script>
   </body>
 </html>
