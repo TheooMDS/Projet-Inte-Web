@@ -1,5 +1,3 @@
-// src/types/search.ts
-
 const API_KEY = 'b76e64f8cb3e2dd8275a0c5d101d5831';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';

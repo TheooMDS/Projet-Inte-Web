@@ -1,5 +1,3 @@
-// src/types/movie-detail.ts
-
 import type { MovieDetail } from './Movie';
 
 const API_KEY = 'b76e64f8cb3e2dd8275a0c5d101d5831';

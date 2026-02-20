@@ -1,5 +1,3 @@
-// src/services/api.ts
-
 import type { MovieApiResponse } from '../types/Movie';
 
 const API_KEY = 'b76e64f8cb3e2dd8275a0c5d101d5831';
