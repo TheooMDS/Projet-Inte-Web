@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="png" href="favicon.png" />
@@ -24,34 +24,36 @@
         </a>
         <h1> Accueil </h1>
         <nav class="nav-links">
-          <a href="pages/series/series"> Séries </a>
-          <a href="pages/films/films"> Films </a>
+          <a href="pages/series/series.html">Séries</a>
+          <a href="pages/films/films.html">Films</a>
+          <a href="favorites.html">Coup de cœur</a>
         </nav>
-       <div class="nav-icons">
-  
-        <form action="search.html" method="get" style="display:flex; align-items:center; gap:0.5rem;">
-        <input name="q" type="text" placeholder="Rechercher..."
-        style="background:#1a1a1a; border:1px solid #333; border-radius:999px; padding:0.4rem 1rem; color:#fff; font-size:0.9rem; outline:none; font-family:Inter,sans-serif;" />
-        <button type="submit" style="background:none; border:none; cursor:pointer; color:#ffffffb3; font-size:1.2rem;">
-        <i class="fas fa-magnifying-glass"></i>
-        </button>
-        </form>
-        <button id="theme-toggle" style="background:none; border:none; cursor:pointer; color:#ffffffb3; font-size:1.5rem;">
-        <i class="fas fa-moon"></i>
-        </button>
-      </div>
+        <div class="nav-icons">
+          <form action="search.html" method="get" style="display:flex; align-items:center; gap:0.5rem;">
+            <input name="q" type="text" placeholder="Rechercher..."
+              style="background:#1a1a1a; border:1px solid #333; border-radius:999px; padding:0.4rem 1rem; color:#fff; font-size:0.9rem; outline:none; font-family:Inter,sans-serif;" />
+            <button type="submit" style="background:none; border:none; cursor:pointer; color:#ffffffb3; font-size:1.2rem;">
+              <i class="fas fa-magnifying-glass"></i>
+            </button>
+          </form>
+          <button id="theme-toggle" style="background:none; border:none; cursor:pointer; color:#ffffffb3; font-size:1.5rem;">
+            <i class="fas fa-moon"></i>
+          </button>
+          <div id="stats-bandeau" style="text-align:center; padding:0.4rem; font-size:0.85rem; color:#51e351; background:transparent; width:100%;"></div>
+        </div>
       </div>
     </header>
+    
 
     <main> 
       <section>
         <div class="bouton-nav-mobile">
-            <a href="pages/films/films">
+            <a href="pages/films/films.html">
               <button class="bouton bouton-films">
                 Films
               </button>
             </a>
-            <a href="pages/series/series">
+            <a href="pages/series/series.html">
               <button class="bouton">
                 Séries
               </button>
@@ -159,19 +161,17 @@
           </div>
       </section>
     </main>
-    <div id="search-overlay" class="search-overlay">
-      <div class="search-box">
-        <div class="search-input-wrap">
-          <i class="fas fa-magnifying-glass"></i>
-          <input id="search-input" type="text" placeholder="Rechercher un film ou une série..." />
-          <button class="search-close" onclick="document.getElementById('search-overlay').classList.remove('search-overlay--open')">
-            <i class="fas fa-xmark"></i>
-          </button>
-        </div>
-        <div id="search-results" class="search-results"></div>
-      </div>
-    </div>
+
     <script type="module" src="src/types/theme.ts"></script>
-    <script type="module" src="src/types/search.ts"></script>
+    <script type="module" src="src/types/index-home.ts"></script>
+    <script>
+      const updateStats = () => {
+        const data = localStorage.getItem('visionary-favorites');
+        const total = data ? JSON.parse(data).length : 0;
+        const bandeau = document.getElementById('stats-bandeau');
+        if (bandeau) bandeau.textContent = `❤️ ${total} favori${total > 1 ? 's' : ''}`;
+      };
+      document.addEventListener('DOMContentLoaded', updateStats);
+    </script>
   </body>
 </html>

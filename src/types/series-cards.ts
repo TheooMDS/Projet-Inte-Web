@@ -1,3 +1,5 @@
+import { toggleFavorite, isFavorite, type FavoriteItem } from './storage';
+
 const API_KEY = 'b76e64f8cb3e2dd8275a0c5d101d5831';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
@@ -36,6 +38,29 @@ function ajouterCompare(id: number, title: string, poster: string, type: string,
 
 (window as any).ajouterCompare = ajouterCompare;
 
+function toggleFav(id: number, title: string, poster: string, rating: number, year: string) {
+  const item: FavoriteItem = {
+    id,
+    title,
+    poster_path: poster,
+    vote_average: rating,
+    type: 'Série',
+    year
+  };
+  
+  const isNowFav = toggleFavorite(item);
+  const btn = document.querySelector(`[data-fav-id="${id}"]`);
+  if (btn) {
+    if (isNowFav) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  }
+}
+
+(window as any).toggleFav = toggleFav;
+
 
 async function fetchSeriesByGenre(genreId: number): Promise<SerieApiResponse> {
   const url = `${BASE_URL}/discover/tv?api_key=${API_KEY}&language=fr-FR&with_genres=${genreId}&sort_by=popularity.desc`;
@@ -52,7 +77,6 @@ async function fetchSeriesUS(): Promise<SerieApiResponse> {
   return response.json() as Promise<SerieApiResponse>;
 }
 
-
 function createCard(serie: Serie): string {
   const poster = serie.poster_path
     ? `${IMAGE_BASE_URL}${serie.poster_path}`
@@ -62,6 +86,8 @@ function createCard(serie: Serie): string {
   const titleEscaped = serie.name.replace(/'/g, "\\'");
   const overviewEscaped = (serie.overview || '').replace(/'/g, "\\'");
   const posterPath = serie.poster_path || '';
+  const rating = serie.vote_average ?? 0;
+  const isFav = isFavorite(serie.id);
 
   return `
     <div class="box-3">
@@ -69,9 +95,15 @@ function createCard(serie: Serie): string {
         <img class="cover" src="${poster}" alt="${serie.name}" loading="lazy">
       </a>
       <button 
-        onclick="event.stopPropagation(); ajouterCompare(${serie.id}, '${titleEscaped}', '${posterPath}', 'Série', '${year}', '${overviewEscaped}', ${serie.vote_average ?? 0})"
+        onclick="event.stopPropagation(); ajouterCompare(${serie.id}, '${titleEscaped}', '${posterPath}', 'Série', '${year}', '${overviewEscaped}', ${rating})"
         class="compare-btn">
         <i class="fas fa-bars"></i>
+      </button>
+      <button 
+        onclick="event.stopPropagation(); toggleFav(${serie.id}, '${titleEscaped}', '${posterPath}', ${rating}, '${year}')"
+        class="favorite-btn ${isFav ? 'active' : ''}"
+        data-fav-id="${serie.id}">
+        <i class="fas fa-heart"></i>
       </button>
     </div>
   `;

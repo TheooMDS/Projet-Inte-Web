@@ -9,8 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <title>Recherche — Visionary</title>
-    
+    <title>Coup de cœur — Visionary</title>
   </head>
   <body>
     <header class="navbar">
@@ -23,7 +22,7 @@
             <img class="logo-mobile-image" src="favicon.png" alt="Logo Visionary">
           </div>
         </a>
-        <h1>Recherche</h1>
+        <h1>Coup de cœur</h1>
         <nav class="nav-links">
           <a href="pages/series/series.html">Séries</a>
           <a href="pages/films/films.html">Films</a>
@@ -47,13 +46,15 @@
 
     <main>
       <section class="carroussel">
-        <h2 class="gaps" id="search-titre">Recherche</h2>
-        <div class="defilement" id="grid-recherche"></div>
+        <h2 class="gaps">Mes coups de cœur
+          <span class="fleche"><i class="fas fa-chevron-right" style="color:#51e351"></i></span>
+        </h2>
+        <div class="defilement" id="grid-favoris"></div>
       </section>
     </main>
 
     <script type="module" src="src/types/theme.ts"></script>
-    <script type="module" src="src/types/search.ts"></script>
+    <script type="module" src="src/types/favorites.ts"></script>
     <script>
       const updateStats = () => {
         const data = localStorage.getItem('visionary-favorites');
